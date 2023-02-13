@@ -1,0 +1,83 @@
+<div
+  class="w-screen flex flex-col items-center justify-center bg-slate-900/60"
+>
+  <div class="bg-slate-200 p-4 h-[600px] rounded-lg">
+    <div class="border-b border-b-slate-600">
+      <h1 class="text-3xl text-center mb-2">Add Server</h1>
+    </div>
+
+    <form
+      #localForm="ngForm"
+      (ngSubmit)="addServer(localForm)"
+      class="flex flex-col gap-y-4 w-[400px] p-4"
+      [formGroup]="createServerForm"
+    >
+      <label for="ip">IP</label>
+      <input
+        class="outline-none p-2 rounded-md"
+        required
+        type="text"
+        id="ip"
+        formControlName="ipAddress"
+      />
+
+      <ng-container
+        *ngIf="
+          createServerForm.controls['ipAddress'].invalid && localForm.submitted
+        "
+      >
+        <p class="text-red-500 text-xs">ipAddress is required</p>
+      </ng-container>
+
+      <label for="name">Name</label>
+      <input
+        class="outline-none p-2 rounded-md"
+        type="text"
+        id="name"
+        formControlName="name"
+      />
+
+      <label for="memory">Memory</label>
+      <input
+        class="outline-none p-2 rounded-md"
+        type="text"
+        id="memory"
+        formControlName="memory"
+      />
+
+      <label for="type">Type</label>
+      <input
+        class="outline-none p-2 rounded-md"
+        type="text"
+        id="type"
+        formControlName="type"
+      />
+
+      <label for="status">Status</label>
+      <select
+        class="outline-none p-2 rounded-md"
+        formControlName="status"
+        id="status"
+      >
+        <option value="SERVER_UP">SERVER UP</option>
+        <option value="SERVER_DOWN">SERVER DOWN</option>
+      </select>
+
+      <div class="flex gap-4 justify-end">
+        <button
+          class="bg-red-600 text-white rounded-md p-2 hover:bg-red-700 transition duration-300 ease-in-out"
+          type="button"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <button
+          class="bg-green-600 text-white rounded-md p-2 hover:bg-green-700 transition duration-300 ease-in-out"
+          type="submit"
+        >
+          Add Server
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
